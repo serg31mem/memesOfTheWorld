@@ -1,4 +1,5 @@
 import {profileAPI} from "../Components/api/api";
+import {authMe} from "./auth-reducer";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -104,7 +105,7 @@ const profileReducer = (state = initiationState, action) => {
                 postsData: [...state.postsData].filter((p) => p.id !== action.idPost)
             }
             case SAVE_PHOTO_SUCCESS:
-            return {
+                return {
                 ...state,
                 userProfile: {...state.userProfile, photos: action.photos}
             }
@@ -150,5 +151,6 @@ export const savePhoto = (photos) => async (dispatch) => {
 
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
+        dispatch(authMe())
     }
 }
