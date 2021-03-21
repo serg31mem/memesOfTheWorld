@@ -1,6 +1,6 @@
 import './App.css';
 import Nav from "./Components/NavBar/Nav";
-import {BrowserRouter, Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
@@ -54,11 +54,11 @@ let mapStateToProps = (state) => ({
 const AppContainer = connect(mapStateToProps, {initializedSuccess})(App)
 
 const MainApp = (props) => {
-    return <BrowserRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer store={store}/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
 export default MainApp
