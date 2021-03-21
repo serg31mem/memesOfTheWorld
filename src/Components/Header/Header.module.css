@@ -1,0 +1,21 @@
+.header {
+    grid-area: h;
+    background-color: green;
+    background-image: url("https://sun9-29.userapi.com/c850620/v850620010/36937/YVgfxQC8sHQ.jpg");
+    background-repeat:no-repeat;
+    background-size: 1820px 125px
+}
+
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    color: white;
+    text-decoration: none;
+}
+
+.loginBlock img {
+    width: 50px;
+    height: 50px
+}

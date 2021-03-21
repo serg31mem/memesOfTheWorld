@@ -1,0 +1,26 @@
+.friends {
+    display: grid;
+}
+
+.friends a {
+    color: black;
+    text-decoration: none;
+}
+
+.friendsItem {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 110px 110px;
+    padding: 20px;
+    text-align: center;
+}
+
+.friends img {
+    width: 75px;
+    height: 75px;
+    border-radius: 30px;
+}
+
+.friendsName {
+    font-family: Calibri, sans-serif;
+}
