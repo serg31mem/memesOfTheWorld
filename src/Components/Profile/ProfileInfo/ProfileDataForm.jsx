@@ -35,8 +35,9 @@ const ProfileDataForm = (props) => {
 
         <div>
             <b>Contact</b>: {Object.keys(props.userProfile.contacts).map(key => {
-            return <div className={s.contacts} key={key}><b>{key}:</b> <Field placeholder={key} name={`contacts.${key}`} component={Input}
-                                             validate={[]}/>
+            return <div className={s.contacts} key={key}><b>{key}:</b> <Field placeholder={key} name={`contacts.${key}`}
+                                                                              component={Input}
+                                                                              validate={[]}/>
             </div>
         })}
         </div>

@@ -1,6 +1,6 @@
 import s from './Dialogs.module.css'
 import * as React from "react";
-import {Field, reduxForm} from "redux-form";
+import {Field, reduxForm, reset} from "redux-form";
 import {element} from "../Common/Form control/FormControl";
 import {maxLengthCreator, required} from "../../utils/validators";
 
@@ -25,8 +25,9 @@ const AddMessageForm = (props) => {
 const AddMessageReduxForm = reduxForm({form: 'addMessage'})(AddMessageForm)
 
 const Dialogs = (props) => {
-    const sendMessage = (formData) => {
+    const sendMessage = (formData, dispatch) => {
         props.sendMessage(formData.newMessageText)
+        dispatch(reset('addMessage'))
     }
     return (
         <div className={s.dialogs}>

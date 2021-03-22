@@ -1,6 +1,6 @@
 import s from './MyPosts.module.css'
 import * as React from "react";
-import {Field, reduxForm} from "redux-form";
+import {Field, reduxForm, reset} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators";
 import {element} from "../../Common/Form control/FormControl";
 import Post from "./Post/Post";
@@ -26,12 +26,12 @@ const MyPostsForm = (props) => {
 const MyPostsReduxForm = reduxForm({form: 'myPosts'})(MyPostsForm)
 
 const MyPosts = React.memo((props) => {
-    console.log('render')
     let postEl = [...props.posts]
         .reverse()
         .map(p => <Post message={p.message} likes={p.likes} key={p.id}/>)
-    const addPost = (formData) => {
+    const addPost = (formData, dispatch) => {
         props.addPost(formData.post)
+        dispatch(reset('myPosts'))
     }
     return (
         <div className={s.descriptionBlock}>
