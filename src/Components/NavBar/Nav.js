@@ -1,9 +1,9 @@
 import s from './Nav.module.css'
 import {NavLink} from "react-router-dom";
 import BlockFriends from "./BlockFriends/BlockFriends";
-import Friends from "../Friends/Friends";
 
 const Nav = (props) => {
+    debugger
     return (
         <nav className={s.nav}>
             <div className={s.item}>
@@ -32,7 +32,7 @@ const Nav = (props) => {
                     Friends
                 </div>
                 <div>
-                    <BlockFriends store={props.store}/>
+                    <BlockFriends profileData={props.profileData}/>
                 </div>
             </div>
         </nav>

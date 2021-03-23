@@ -13,6 +13,8 @@ import {initializedSuccess} from "./Redux/app-reducer";
 import Preloader from "./Components/Common/Preloader/Preloader";
 import store from "./Redux/store-redux";
 import {withSuspense} from "./Components/hoc/withSuspense";
+import FriendsContainer from "./Components/Friends/FriendsContainer";
+import NavContainer from "./Components/NavBar/NavContainer";
 
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
@@ -30,13 +32,13 @@ class App extends React.Component {
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
-                <Nav store={this.props.store}/>
+                <NavContainer/>
                 <div className='app-wrapper-content'>
                     <Switch>
                         <Redirect exact from="/" to="/profile" />
                         <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                         <Route path='/friends'
-                               render={() => <Friends state={this.props.store.getState().profilePage.profileData}/>}/>
+                               render={() => <FriendsContainer />}/>
                         <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
                         <Route path='/news' render={() => <News/>}/>
                         <Route path='/music' render={() => <Music/>}/>
@@ -60,7 +62,7 @@ const AppContainer = connect(mapStateToProps, {initializedSuccess})(App)
 const MainApp = (props) => {
     return <HashRouter>
         <Provider store={store}>
-            <AppContainer store={store}/>
+            <AppContainer/>
         </Provider>
     </HashRouter>
 }
