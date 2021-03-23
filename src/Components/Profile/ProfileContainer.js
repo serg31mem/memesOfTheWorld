@@ -9,6 +9,7 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component {
 
     refreshProfile = () => {
+        // the line below is taken from withRouter
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authuserID
