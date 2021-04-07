@@ -32,6 +32,7 @@ const usersReducer = (state = initiationState, action) => {
                 })
             }
         case UNFOLLOW:
+            debugger
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -96,7 +97,6 @@ export const requestUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(toggleIsFetching(true))
     dispatch(setCurrentPage(currentPage))
     let data = await usersAPI.getUsers(currentPage, pageSize)
-
     dispatch(toggleIsFetching(false))
     dispatch(setUsers(data.items))
     dispatch(setTotalUsersCount(data.totalCount))
@@ -106,23 +106,19 @@ export const requestUsers = (currentPage, pageSize) => async (dispatch) => {
 export const unfollow = (userID) => async (dispatch) => {
     dispatch(toggleIsFollowingProgress(true, userID))
     let data = await usersAPI.unfollowUser(userID)
-
     if (data.resultCode === 0) {
         dispatch(unFollowSuccess(userID))
     }
     dispatch(toggleIsFollowingProgress(false, userID))
-
 }
 
 export const follow = (userID) => async (dispatch) => {
     dispatch(toggleIsFollowingProgress(true, userID))
     let data = await usersAPI.followUser(userID)
-
     if (data.resultCode === 0) {
         dispatch(followSuccess(userID))
     }
     dispatch(toggleIsFollowingProgress(false, userID))
 }
-
 
 export default usersReducer

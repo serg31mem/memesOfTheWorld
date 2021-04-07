@@ -34,7 +34,7 @@ export const authAPI = {
             .get(`auth/me`)
 
     },
-    authLogin(email, password, rememberMe = false, captcha = '') {
+    authLogin(email, password, rememberMe, captcha = '') {
         return instance
             .post('auth/login', {email, password, rememberMe, captcha})
     },

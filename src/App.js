@@ -1,10 +1,8 @@
 import './App.css';
-import Nav from "./Components/NavBar/Nav";
-import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import Friends from "./Components/Friends/Friends";
 import React from "react";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
@@ -15,6 +13,7 @@ import store from "./Redux/store-redux";
 import {withSuspense} from "./Components/hoc/withSuspense";
 import FriendsContainer from "./Components/Friends/FriendsContainer";
 import NavContainer from "./Components/NavBar/NavContainer";
+import {compose} from "redux";
 
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
@@ -57,14 +56,17 @@ let mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
 
-const AppContainer = connect(mapStateToProps, {initializedSuccess})(App)
+const AppContainer = compose(
+    withRouter,
+    connect(mapStateToProps, {initializedSuccess})
+)(App)
 
 const MainApp = (props) => {
-    return <HashRouter>
+    return <BrowserRouter>
         <Provider store={store}>
-            <AppContainer/>
+            <AppContainer {...props}/>
         </Provider>
-    </HashRouter>
+    </BrowserRouter>
 }
 
 export default MainApp

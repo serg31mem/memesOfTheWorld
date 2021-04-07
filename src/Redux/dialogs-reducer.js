@@ -12,7 +12,7 @@ const dilogsReduser = (state = initiationState, action) => {
     switch (action.type) {
         case SEND_MESSAGE:{
             let newMessage = {
-                id: 4,
+                id: state.messageData[state.messageData.length - 1].id + 1,
                 textMessage: action.messageBody
             }
             return  {

@@ -1,6 +1,7 @@
 import {profileAPI} from "../Components/api/api";
 import {authMe} from "./auth-reducer";
 import {stopSubmit} from "redux-form";
+import warning from "react-redux/lib/utils/warning";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -82,7 +83,7 @@ const profileReducer = (state = initiationState, action) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
-                id: 10,
+                id: state.postsData[state.postsData.length - 1].id + 1,
                 message: action.bodyPost,
                 likes: 0,
             }
@@ -125,23 +126,18 @@ export const setProfileStatus = (profileStatus) => ({type: SET_PROFILE_STATUS, p
 
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
 
-export default profileReducer
-
 export const getProfile = (userId) => async (dispatch) => {
     let data = await profileAPI.getProfile(userId)
-
     dispatch(setUserProfile(data))
 }
 
 export const getProfileStatus = (userId) => async (dispatch) => {
     let response = await profileAPI.getProfileStatus(userId)
-
     dispatch(setProfileStatus(response))
 }
 
 export const updateProfileStatus = (status) => async (dispatch) => {
     let response = await profileAPI.updateProfileStatus(status)
-
     if (response.data.resultCode === 0) {
         dispatch(setProfileStatus(status))
     }
@@ -149,7 +145,6 @@ export const updateProfileStatus = (status) => async (dispatch) => {
 
 export const savePhoto = (photos) => async (dispatch) => {
     let response = await profileAPI.savePhoto(photos)
-
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
         dispatch(authMe())
@@ -166,3 +161,5 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
         return Promise.reject(response.data.messages[0])
     }
 }
+
+export default profileReducer

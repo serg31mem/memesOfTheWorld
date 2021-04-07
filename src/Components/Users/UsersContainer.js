@@ -1,10 +1,6 @@
 import {connect} from "react-redux";
 import * as React from "react";
-import {
-    follow, requestUsers,
-    setCurrentPage,
-    unfollow
-} from "../../Redux/Users-reducer";
+import {follow, requestUsers, setCurrentPage, unfollow} from "../../Redux/Users-reducer";
 import Users from "./Users";
 import {currentPage, followingProgress, getUsers, isFetching, pageSize, totalCount} from "../../Redux/users-selectors";
 

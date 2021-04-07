@@ -68,9 +68,10 @@ export const authLogin = (email, password, rememberMe, captcha) => async (dispat
     } else {
         if (response.data.resultCode === 10) {
             dispatch(getCaptcha())
+        } else {
+            let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+            dispatch(stopSubmit('login', {_error: message}))
         }
-        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
-        dispatch(stopSubmit('login', {_error: message}))
     }
 }
 

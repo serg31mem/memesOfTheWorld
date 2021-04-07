@@ -24,11 +24,10 @@ const appReducer = (state = initiationState, action) => {
 
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS})
 
-export const initialized = () => (dispatch) => {
-    let promise = dispatch(authMe())
-    promise.then(() => {
-        dispatch(initializedSuccess)
-    })
+export const initialized = () => async (dispatch) => {
+    await dispatch(authMe())
+    dispatch(initializedSuccess)
 }
+
 
 export default appReducer

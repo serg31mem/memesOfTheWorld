@@ -3,9 +3,11 @@ import {NavLink} from "react-router-dom";
 import BlockFriends from "./BlockFriends/BlockFriends";
 
 const linkCreator = (to, linkName) => {
-    return <div className={s.item}>
-        <NavLink to={`/${to}`} activeClassName={s.activeLink}>{linkName}</NavLink>
-    </div>
+    return (
+        <div className={s.item}>
+            <NavLink to={`/${to}`} activeClassName={s.activeLink}>{linkName}</NavLink>
+        </div>
+    )
 }
 
 const Nav = (props) => {
