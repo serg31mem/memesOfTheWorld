@@ -40,7 +40,9 @@ class ProfileContainer extends React.Component {
                          updateProfileStatus={this.props.updateProfileStatus}
                          isOwner={!this.props.match.params.userId}
                          savePhoto={this.props.savePhoto}
-                         saveProfile={this.props.saveProfile}/>
+                         saveProfile={this.props.saveProfile}
+                         errorMessage={this.props.errorMessage}
+                         isErrorForm={this.props.isErrorForm}/>
 
             </div>
         )
@@ -51,7 +53,9 @@ let mapStateToProps = (state) => {
     return {
         userProfile: state.profilePage.userProfile,
         status: state.profilePage.status,
-        authUserID: state.auth.userID
+        authUserID: state.auth.userID,
+        isErrorForm: state.profilePage.isErrorForm,
+        errorMessage: state.profilePage.errorMessage,
     }
 }
 

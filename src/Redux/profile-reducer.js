@@ -1,13 +1,12 @@
 import {profileAPI} from "../Components/api/api";
 import {authMe} from "./auth-reducer";
-import {stopSubmit} from "redux-form";
-import warning from "react-redux/lib/utils/warning";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
 const DELETE_POST = 'DELETE_POST'
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
+const SET_ERROR_FORM = 'profile/SET_ERROR_FORM'
 
 
 let initiationState = {
@@ -76,7 +75,8 @@ let initiationState = {
     ],
     userProfile: null,
     status: '',
-
+    isErrorForm: false,
+    errorMessage: '',
 }
 
 const profileReducer = (state = initiationState, action) => {
@@ -111,6 +111,12 @@ const profileReducer = (state = initiationState, action) => {
                 ...state,
                 userProfile: {...state.userProfile, photos: action.photos}
             }
+        case SET_ERROR_FORM:
+            return {
+                ...state,
+                isErrorForm: action.isErrorForm,
+                errorMessage: action.errorMessage,
+            }
         default:
             return state
     }
@@ -125,6 +131,8 @@ export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userPro
 export const setProfileStatus = (profileStatus) => ({type: SET_PROFILE_STATUS, profileStatus})
 
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
+
+export const setErrorForm = (isErrorForm, errorMessage) => ({type: SET_ERROR_FORM, isErrorForm, errorMessage})
 
 export const getProfile = (userId) => async (dispatch) => {
     let data = await profileAPI.getProfile(userId)
@@ -157,7 +165,7 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
     if (response.data.resultCode === 0) {
         dispatch(getProfile(userId))
     } else {
-        dispatch(stopSubmit('profile-edit', {_error: response.data.messages[0]}))
+        dispatch(setErrorForm(true, response.data.messages[0]))
         return Promise.reject(response.data.messages[0])
     }
 }
