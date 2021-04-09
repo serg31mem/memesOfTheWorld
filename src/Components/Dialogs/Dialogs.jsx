@@ -1,8 +1,8 @@
 import s from './Dialogs.module.css'
 import * as React from "react";
-import {Field, reduxForm, reset} from "redux-form";
+import {Form, Field} from 'react-final-form'
 import {element} from "../Common/Form control/FormControl";
-import {maxLengthCreator, required} from "../../utils/validators";
+import {composeValidators, maxLengthCreator, required} from "../../utils/validators";
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
@@ -11,20 +11,31 @@ const maxLength100 = maxLengthCreator(100)
 const Textarea = element('textarea')
 
 const AddMessageForm = (props) => {
+
+    const sendMessage = (formData) => {
+        props.sendMessage(formData.newMessageText)
+    }
+
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div className={s.newMessage}>
-                <Field placeholder={'Message'} name={'newMessageText'} component={Textarea}
-                       validate={[required, maxLength100]}/>
-            </div>
-            <div>
-                <button>Send</button>
-            </div>
-        </form>
+        <Form
+            onSubmit={sendMessage}
+            render={({handleSubmit, form}) => (
+                <form onSubmit={async event => {
+                    await handleSubmit(event)
+                    form.reset()
+                    form.resetFieldState('newMessageText')
+                }}>
+                    <div className={s.newMessage}>
+                        <Field placeholder={'Message'} name={'newMessageText'} component={Textarea}
+                               validate={composeValidators(required, maxLength100)}/>
+                    </div>
+                    <div>
+                        <button>Send</button>
+                    </div>
+                </form>
+            )}/>
     )
 }
-
-const AddMessageReduxForm = reduxForm({form: 'addMessage'})(AddMessageForm)
 
 const Dialogs = (props) => {
 
@@ -34,10 +45,7 @@ const Dialogs = (props) => {
     let messageElements = props.messageData
         .map(message => <Message textMessage={message.textMessage} key={message.id}/>)
 
-    const sendMessage = (formData, dispatch) => {
-        props.sendMessage(formData.newMessageText)
-        dispatch(reset('addMessage'))
-    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
@@ -45,7 +53,7 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 {messageElements}
-                <AddMessageReduxForm onSubmit={sendMessage}/>
+                <AddMessageForm sendMessage={props.sendMessage}/>
             </div>
         </div>
     )

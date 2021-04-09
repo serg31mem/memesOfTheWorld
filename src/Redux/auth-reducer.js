@@ -1,9 +1,9 @@
 import {authAPI, profileAPI, securityAPI} from "../Components/api/api";
-import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA = 'SET_USER_DATA'
-const SET_USER_PHOTO = 'SET_USER_PHOTO'
-const SET_CAPTCHA_URL = 'SET_CAPTCHA_URL'
+const SET_USER_DATA = 'auth/SET_USER_DATA'
+const SET_USER_PHOTO = 'auth/SET_USER_PHOTO'
+const SET_CAPTCHA_URL = 'auth/SET_CAPTCHA_URL'
+const SET_ERROR_FORM = 'auth/SET_ERROR_FORM'
 
 let initiationState = {
     userID: null,
@@ -13,8 +13,9 @@ let initiationState = {
     userPhoto: null,
     isUserPhoto: false,
     captchaUrl: '',
+    isErrorForm: false,
+    errorMessage: '',
 }
-
 
 const authReducer = (state = initiationState, action) => {
 
@@ -34,6 +35,12 @@ const authReducer = (state = initiationState, action) => {
                 ...state,
                 captchaUrl: action.captchaUrl,
             }
+        case SET_ERROR_FORM:
+            return {
+                ...state,
+                isErrorForm: action.isErrorForm,
+                errorMessage: action.errorMessage,
+            }
         default:
             return state
     }
@@ -48,6 +55,8 @@ export const setUserData = (userID, email, login, isAuth) => ({
 export const setUserPhoto = (userPhoto) => ({type: SET_USER_PHOTO, userPhoto})
 
 export const setCaptcha = (captchaUrl) => ({type: SET_CAPTCHA_URL, captchaUrl})
+
+export const setErrorForm = (isErrorForm, errorMessage) => ({type: SET_ERROR_FORM, isErrorForm, errorMessage})
 
 export default authReducer
 
@@ -70,7 +79,7 @@ export const authLogin = (email, password, rememberMe, captcha) => async (dispat
             dispatch(getCaptcha())
         } else {
             let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
-            dispatch(stopSubmit('login', {_error: message}))
+            dispatch(setErrorForm(true, message))
         }
     }
 }

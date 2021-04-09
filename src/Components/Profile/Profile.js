@@ -1,5 +1,6 @@
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import * as React from "react";
 
 const Profile = (props) => {
     return (
@@ -9,7 +10,9 @@ const Profile = (props) => {
                          updateProfileStatus={props.updateProfileStatus}
                          isOwner={props.isOwner}
                          savePhoto={props.savePhoto}
-                         saveProfile={props.saveProfile}/>
+                         saveProfile={props.saveProfile}
+                         errorMessage={props.errorMessage}
+                         isErrorForm={props.isErrorForm}/>
             <MyPostsContainer/>
         </div>
     )
