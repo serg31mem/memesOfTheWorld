@@ -2,7 +2,7 @@
     padding: 10px;
 }
 
-.profilePhoto img{
+.profilePhoto img {
     width: 200px;
     height: 200px;
 }
@@ -12,13 +12,11 @@
 }
 
 .formControl.error input,
-.formControl.error textarea
-{
+.formControl.error textarea {
     border: solid red 2px;
 }
 
-.formControl.error span
-{
+.formControl.error span {
     color: red;
 }
 
@@ -26,4 +24,8 @@
     border: solid red 2px;
     padding: 10px;
     color: red;
+}
+
+.preloader {
+    float: left;
 }

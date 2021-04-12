@@ -11,3 +11,11 @@
     font-weight: bold;
     border-color: black;
 }
+
+.buttonPrev {
+    margin-right: 5px;
+}
+
+.buttonNext{
+    margin-left: 5px;
+}

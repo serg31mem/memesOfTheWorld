@@ -12,12 +12,6 @@
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: gainsboro;
+    background-color: #E0E0E0;
 }
-
-.app-wrapper-content img {
-    width: 1600px;
-    height: 135px;
-}
-
 

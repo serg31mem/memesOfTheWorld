@@ -5,10 +5,12 @@ import {element} from "../Common/Form control/FormControl";
 import {composeValidators, maxLengthCreator, required} from "../../utils/validators";
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
+import Button from "@material-ui/core/Button";
+import {Icon} from "@material-ui/core";
 
 const maxLength100 = maxLengthCreator(100)
 
-const Textarea = element('textarea')
+const Textarea = element('textarea', 30, 4)
 
 const AddMessageForm = (props) => {
 
@@ -20,17 +22,24 @@ const AddMessageForm = (props) => {
         <Form
             onSubmit={sendMessage}
             render={({handleSubmit, form}) => (
-                <form onSubmit={async event => {
-                    await handleSubmit(event)
-                    form.reset()
-                    form.resetFieldState('newMessageText')
-                }}>
+                <form onSubmit={handleSubmit}>
                     <div className={s.newMessage}>
                         <Field placeholder={'Message'} name={'newMessageText'} component={Textarea}
                                validate={composeValidators(required, maxLength100)}/>
                     </div>
                     <div>
-                        <button>Send</button>
+                        <Button
+                            onClick={async event => {
+                                await handleSubmit(event)
+                                form.reset()
+                                form.resetFieldState('newMessageText')
+                            }}
+                            variant="contained"
+                            color="primary"
+                            endIcon={<Icon>send</Icon>}
+                        >
+                            Send
+                        </Button>
                     </div>
                 </form>
             )}/>

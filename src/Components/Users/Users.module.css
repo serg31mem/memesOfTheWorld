@@ -1,8 +1,9 @@
-.users {
+.usersWrapper {
     display: grid;
+    padding-left: 10px;
 }
 
-.usersItem {
+.usersAvatar {
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr;
@@ -11,7 +12,7 @@
 
 }
 
-.usersItem img {
+.usersAvatar img {
     width: 50px;
     height: 50px;
     border-radius: 30px;
@@ -28,4 +29,8 @@
 
 .selectedPage {
     font-weight: bold;
+}
+
+.userInfoBlock {
+    margin-top: 5px;
 }

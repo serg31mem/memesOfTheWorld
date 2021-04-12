@@ -8,7 +8,7 @@ let initiationState = {
     ],
 }
 
-const dilogsReduser = (state = initiationState, action) => {
+const dialogsReducer = (state = initiationState, action) => {
     switch (action.type) {
         case SEND_MESSAGE:{
             let newMessage = {
@@ -27,4 +27,4 @@ const dilogsReduser = (state = initiationState, action) => {
 
 export const sendMessage = (messageBody) => ({type: SEND_MESSAGE, messageBody})
 
-export default dilogsReduser
+export default dialogsReducer

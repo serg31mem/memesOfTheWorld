@@ -2,46 +2,45 @@ import * as React from "react";
 import s from '../Users.module.css'
 import userPhoto from '../../../assets/images/userPhoto.png'
 import {NavLink} from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 const User = (props) => {
 
-    return <div>
-        <span>
-            <div className={s.usersItem}>
+    return <div className={s.usersWrapper}>
+        <div>
+            <div className={s.usersAvatar}>
                 <NavLink to={`/profile/${props.user.id}`}>
                     <img src={props.user.photos.small != null ? props.user.photos.small : userPhoto}/>
                 </NavLink>
             </div>
             <div>
                 {props.user.followed
-                    ? <button disabled={props.followingProgress.some(id => id === props.user.id)}
+                    ? <Button type="submit"
                               onClick={() => {
                                   props.unfollow(props.user.id)
-                              }}>Unfollow</button>
-                    : <button disabled={props.followingProgress.some(id => id === props.user.id)}
+                              }}
+                              disabled={props.followingProgress.some(id => id === props.user.id)}
+                              variant="contained"
+                              color="primary">Unfollow</Button>
+                    : <Button type="submit"
                               onClick={() => {
                                   props.follow(props.user.id)
-                              }}>Follow</button>}
+                              }}
+                              disabled={props.followingProgress.some(id => id === props.user.id)}
+                              variant="contained"
+                              color="primary">Follow</Button>}
             </div>
-        </span>
-        <span>
-            <span>
+            <div className={s.userInfoBlock}>
                 <div>
-                    {props.user.name}
+                    <b>Login: </b>{props.user.name}
                 </div>
                 <div>
-                    {props.user.status}
+                    {props.user.status && <div><b>Status: </b>{props.user.status}</div>}
                 </div>
-            </span>
-            <span>
-                <div>
-                    {'u.location.country'}
-                </div>
-                <div>
-                    {'u.location.city'}
-                </div>
-            </span>
-        </span>
+            </div>
+
+
+        </div>
     </div>
 }
 
