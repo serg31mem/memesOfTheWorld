@@ -2,23 +2,17 @@ import s from './ProfileInfo.module.css'
 import Preloader from "../../Common/Preloader/Preloader";
 import * as React from "react";
 import {useState} from "react";
-import userPhoto from '../../../assets/images/userPhoto.png'
-import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import ProfileDataForm from "./ProfileDataForm";
 import Button from "@material-ui/core/Button";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import {NavLink} from "react-router-dom";
 
 const ProfileInfo = (props) => {
 
     let [editMode, setEditMode] = useState(false)
 
     if (!props.userProfile) {
-        return <div className={s.preloader}><Preloader/></div>
-    }
-
-    const onMainPhotoSelected = (e) => {
-        if (e.target.files.length) {
-            props.savePhoto(e.target.files[0])
-        }
+        return <div></div>
     }
 
     const onSubmit = (formData) => {
@@ -31,20 +25,13 @@ const ProfileInfo = (props) => {
     }
 
     return (
-        <div className={s.profilePhoto}>
-            <div>
-                <img src={props.userProfile.photos.large != null ? props.userProfile.photos.large : userPhoto}/>
-                <div>
-                    {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-                </div>
-            </div>
-            <div>
-                <ProfileStatusWithHooks status={props.status} updateProfileStatus={props.updateProfileStatus}/>
-            </div>
+        <div>
+            <ProfileStatusWithHooks status={props.status} updateProfileStatus={props.updateProfileStatus}/>
+
             {editMode
                 ? <ProfileDataForm initialValues={props.userProfile} userProfile={props.userProfile}
-                                        onSubmit={onSubmit} errorMessage={props.errorMessage}
-                                        isErrorForm={props.isErrorForm}/>
+                                   onSubmit={onSubmit} errorMessage={props.errorMessage}
+                                   isErrorForm={props.isErrorForm}/>
                 : <ProfileData userProfile={props.userProfile} isOwner={props.isOwner}
                                goToEditMode={() => setEditMode(true)}/>}
 
@@ -53,16 +40,9 @@ const ProfileInfo = (props) => {
 }
 
 
-
 const ProfileData = (props) => {
     return <div>
-        {props.isOwner &&
-        <div>
-            <Button type="submit"
-                    onClick={props.goToEditMode}
-                    variant="contained"
-                    color="primary">Edit profile</Button>
-        </div>}
+
         <div>
             <b>Full Name:</b> {props.userProfile.fullName}
         </div>
@@ -82,11 +62,22 @@ const ProfileData = (props) => {
             return <Contact key={key} contactTitle={key} contactValue={props.userProfile.contacts[key]}/>
         })}
         </div>
+        {props.isOwner &&
+        <div className={s.button}>
+            <Button type="submit"
+                    onClick={props.goToEditMode}
+                    variant="contained"
+                    color="primary"
+                    size="small">Edit profile</Button>
+        </div>}
     </div>
 }
 
 const Contact = (props) => {
-    return <div className={s.contacts}><b>{props.contactTitle}:</b> {props.contactValue}</div>
+    return <div className={s.contacts}>
+        <b>{props.contactTitle}: </b>
+        <a target="_blank" href={props.contactValue}>{props.contactValue}</a>
+    </div>
 }
 
 export default ProfileInfo

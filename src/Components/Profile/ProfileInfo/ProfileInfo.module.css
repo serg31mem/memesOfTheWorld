@@ -1,14 +1,10 @@
-.profilePhoto {
-    padding: 10px;
-}
-
-.profilePhoto img {
-    width: 200px;
-    height: 200px;
-}
-
 .contacts {
     padding-left: 10px;
+}
+
+.contacts a {
+    text-decoration: none;
+    color: #2A5885;
 }
 
 .formControl.error input,
@@ -28,4 +24,8 @@
 
 .preloader {
     float: left;
+}
+
+.button {
+    margin-top: 5px;
 }
