@@ -1,8 +1,5 @@
 import './App.css';
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
-import News from "./Components/News/News";
-import Music from "./Components/Music/Music";
-import Settings from "./Components/Settings/Settings";
 import React from "react";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
@@ -39,10 +36,7 @@ class App extends React.Component {
                         <Route path='/friends'
                                render={() => <FriendsContainer />}/>
                         <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
-                        <Route path='/news' render={() => <News/>}/>
-                        <Route path='/music' render={() => <Music/>}/>
                         <Route path='/users' render={withSuspense(UsersContainer)}/>
-                        <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/login' render={() => <Login/>}/>
                         <Route path='*' render={() => <div><b>404 NOT FOUND</b></div>}/>
                     </Switch>
