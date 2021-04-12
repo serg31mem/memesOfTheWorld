@@ -1,13 +1,14 @@
 import s from './MyPosts.module.css'
 import * as React from "react";
-import {Form, Field} from 'react-final-form'
+import {Field, Form} from 'react-final-form'
 import {composeValidators, maxLengthCreator, required} from "../../../utils/validators";
 import {element} from "../../Common/Form control/FormControl";
 import Post from "./Post/Post";
+import Button from '@material-ui/core/Button';
 
-const maxLength10 = maxLengthCreator(140)
+const maxLength140 = maxLengthCreator(140)
 
-const Textarea = element('textarea')
+const Textarea = element('textarea', 30, 4)
 
 const MyPostsForm = (props) => {
 
@@ -20,17 +21,20 @@ const MyPostsForm = (props) => {
             onSubmit={addPost}
             render={({handleSubmit, form}) => (
                 <form
-                    onSubmit={async event => {
-                        await handleSubmit(event)
-                        form.reset()
-                        form.resetFieldState('post')
-                    }}>
+                    onSubmit={handleSubmit}>
                     <div>
                         <Field placeholder={'New post'} name={'post'} component={Textarea}
-                               validate={composeValidators(required, maxLength10)}/>
+                               validate={composeValidators(required, maxLength140)}/>
                     </div>
-                    <div>
-                        <button>Add post</button>
+                    <div className={s.button}>
+                        <Button type="submit"
+                                onClick={async event => {
+                                    await handleSubmit(event)
+                                    form.reset()
+                                    form.resetFieldState('post')
+                                }}
+                                variant="contained"
+                                color="primary">Add post</Button>
                     </div>
                 </form>
             )}/>

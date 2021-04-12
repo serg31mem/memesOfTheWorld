@@ -4,8 +4,9 @@ import {authLogin} from "../../Redux/auth-reducer";
 import {element} from "../Common/Form control/FormControl";
 import {required} from "../../utils/validators";
 import {Redirect} from "react-router-dom";
-import s from '../Common/Form control/FormControl.module.css'
+import s from './Login.module.css'
 import * as React from "react";
+import Button from "@material-ui/core/Button";
 
 const Input = element('input')
 
@@ -17,10 +18,9 @@ const LoginForm = (props) => {
 
     return (
         <Form onSubmit={onSubmit}
-              render={({handleSubmit, form}) => (
+              render={({handleSubmit, submitting, pristine}) => (
                   <form onSubmit={async event => {
                       await handleSubmit(event)
-                      // form.resetFieldState('')
                   }}>
                       <div>
                           <Field placeholder={'Email'} name={'email'} component={Input}
@@ -43,8 +43,12 @@ const LoginForm = (props) => {
                       <div>
                           {props.isErrorForm && <div className={s.formSummaryError}>{props.errorMessage}</div>}
                       </div>
-                      <div>
-                          <button>Login</button>
+                      <div className={s.button}>
+                          <Button type="submit"
+                                  disabled={props.loggingInProgress}
+                                  onClick={handleSubmit}
+                                  variant="contained"
+                                  color="primary">LOGIN</Button>
                       </div>
                   </form>
               )}/>
@@ -57,11 +61,13 @@ const Login = (props) => {
         return <Redirect to={'/profile'}/>
     }
 
-    return <div>
-        <h1>Login</h1>
-        <LoginForm authLogin={props.authLogin} captchaUrl={props.captchaUrl} isErrorForm={props.isErrorForm}
-                   errorMessage={props.errorMessage}/>
-    </div>
+    return (
+        <div className={s.loginBlock}>
+            <h1>Login</h1>
+            <LoginForm authLogin={props.authLogin} captchaUrl={props.captchaUrl} isErrorForm={props.isErrorForm}
+                       errorMessage={props.errorMessage} loggingInProgress={props.loggingInProgress}/>
+        </div>
+    )
 }
 
 const mapStateToProps = (state) => {
@@ -70,6 +76,7 @@ const mapStateToProps = (state) => {
         captchaUrl: state.auth.captchaUrl,
         isErrorForm: state.auth.isErrorForm,
         errorMessage: state.auth.errorMessage,
+        loggingInProgress: state.auth.loggingInProgress
     }
 }
 

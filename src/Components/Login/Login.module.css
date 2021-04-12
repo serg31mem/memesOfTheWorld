@@ -1,0 +1,12 @@
+.captcha img {
+    width: 150px;
+    height: 50px
+}
+
+.loginBlock {
+    padding-left: 10px;
+}
+
+.button {
+    margin-top: 5px;
+}

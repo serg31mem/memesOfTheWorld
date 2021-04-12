@@ -1,26 +1,27 @@
 import s from './Post.module.css'
 import userPhoto from '../../../../assets/images/userPhoto.png'
 import {useState} from "react";
+import Button from "@material-ui/core/Button";
 
 const Post = (props) => {
 
     const [count, setCount] = useState(0)
-
-    const renderButtonLike = () => {
-        if (count === 0) {
-            return <button onClick={() => setCount(count + 1)}>Like</button>
-        } else {
-            return <button onClick={() => setCount(count - 1)}>Like</button>
-        }
-    }
 
     return (
         <div className={s.item}>
             <img src={userPhoto}/>
             {props.message}
             <div>
-                {renderButtonLike()}
-                <span>{count}</span>
+                {count === 0
+                    ? <Button variant="contained"
+                              color="secondary"
+                              size="small"
+                              onClick={() => setCount(count + 1)}>Like</Button>
+                    : <Button variant="contained"
+                              color="secondary"
+                              size="small"
+                              onClick={() => setCount(count - 1)}>Like</Button>}
+                <span className={s.likeCount}> {count}</span>
             </div>
         </div>
     )

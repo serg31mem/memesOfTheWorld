@@ -4,6 +4,8 @@ const SET_USER_DATA = 'auth/SET_USER_DATA'
 const SET_USER_PHOTO = 'auth/SET_USER_PHOTO'
 const SET_CAPTCHA_URL = 'auth/SET_CAPTCHA_URL'
 const SET_ERROR_FORM = 'auth/SET_ERROR_FORM'
+const TOGGLE_IS_LOGGING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
+
 
 let initiationState = {
     userID: null,
@@ -15,6 +17,7 @@ let initiationState = {
     captchaUrl: '',
     isErrorForm: false,
     errorMessage: '',
+    loggingInProgress: false,
 }
 
 const authReducer = (state = initiationState, action) => {
@@ -41,6 +44,11 @@ const authReducer = (state = initiationState, action) => {
                 isErrorForm: action.isErrorForm,
                 errorMessage: action.errorMessage,
             }
+            case TOGGLE_IS_LOGGING_PROGRESS:
+            return {
+                ...state,
+                loggingInProgress: action.isFetching,
+            }
         default:
             return state
     }
@@ -58,6 +66,8 @@ export const setCaptcha = (captchaUrl) => ({type: SET_CAPTCHA_URL, captchaUrl})
 
 export const setErrorForm = (isErrorForm, errorMessage) => ({type: SET_ERROR_FORM, isErrorForm, errorMessage})
 
+export const toggleIsLoggingProgress = (isFetching) => ({type: TOGGLE_IS_LOGGING_PROGRESS, isFetching})
+
 export default authReducer
 
 export const authMe = () => async (dispatch) => {
@@ -71,6 +81,7 @@ export const authMe = () => async (dispatch) => {
 }
 
 export const authLogin = (email, password, rememberMe, captcha) => async (dispatch) => {
+    dispatch(toggleIsLoggingProgress(true))
     let response = await authAPI.authLogin(email, password, rememberMe, captcha)
     if (response.data.resultCode === 0) {
         dispatch(authMe())
@@ -82,6 +93,7 @@ export const authLogin = (email, password, rememberMe, captcha) => async (dispat
             dispatch(setErrorForm(true, message))
         }
     }
+    dispatch(toggleIsLoggingProgress(false))
 }
 
 export const authLogout = () => async (dispatch) => {

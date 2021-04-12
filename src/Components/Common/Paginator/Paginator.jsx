@@ -2,7 +2,7 @@ import * as React from "react";
 import s from '../Paginator/Paginator.module.css'
 import {useState} from "react";
 import cn from "classnames"
-
+import Button from "@material-ui/core/Button";
 
 const Paginator = ({portionSize = 10, ...props}) => {
     let pagesCount = Math.ceil(props.totalCount / props.pageSize)
@@ -19,9 +19,14 @@ const Paginator = ({portionSize = 10, ...props}) => {
     return <div className={s.paginator}>
         <div>
             {portionNumber > 1 &&
-            <button onClick={() => {
-                setPortionNumber(portionNumber - 1)
-            }}>PREV</button>}
+            <Button type="submit"
+                    size="small"
+                    onClick={() => {
+                        setPortionNumber(portionNumber - 1)
+                    }}
+                    variant="contained"
+                    color="primary"
+                    className={s.buttonPrev}>PREV</Button>}
 
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -35,9 +40,14 @@ const Paginator = ({portionSize = 10, ...props}) => {
                                  }}>{p}</span>
                 })}
             {portionCount > portionNumber &&
-            <button onClick={() => {
-                setPortionNumber(portionNumber + 1)
-            }}>NEXT</button>}
+            <Button type="submit"
+                    size="small"
+                    onClick={() => {
+                        setPortionNumber(portionNumber + 1)
+                    }}
+                    variant="contained"
+                    color="primary"
+                    className={s.buttonNext}>NEXT</Button>}
         </div>
 
     </div>

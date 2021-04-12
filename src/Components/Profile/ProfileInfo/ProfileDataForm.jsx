@@ -2,6 +2,8 @@ import * as React from "react";
 import {Form, Field} from 'react-final-form'
 import {element} from "../../Common/Form control/FormControl";
 import s from "./ProfileInfo.module.css";
+import Button from "@material-ui/core/Button";
+import SaveIcon from '@material-ui/icons/Save'
 
 const Input = element('input')
 const Textarea = element('textarea')
@@ -14,7 +16,15 @@ const ProfileDataForm = (props) => {
               render={({handleSubmit, form}) => (
                   <form onSubmit={handleSubmit}>
                       <div>
-                          <button>Save</button>
+                          <Button
+                              onClick={handleSubmit}
+                              variant="contained"
+                              color="primary"
+                              size="small"
+                              startIcon={<SaveIcon />}
+                          >
+                              Save
+                          </Button>
                       </div>
                       <div>
                           {props.isErrorForm && <div className={s.formSummaryError}>{props.errorMessage}</div>}

@@ -4,15 +4,15 @@ import * as React from "react";
 import {useState} from "react";
 import userPhoto from '../../../assets/images/userPhoto.png'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import ProfileDataFormRedux from "./ProfileDataForm";
 import ProfileDataForm from "./ProfileDataForm";
+import Button from "@material-ui/core/Button";
 
 const ProfileInfo = (props) => {
 
     let [editMode, setEditMode] = useState(false)
 
     if (!props.userProfile) {
-        return <Preloader/>
+        return <div className={s.preloader}><Preloader/></div>
     }
 
     const onMainPhotoSelected = (e) => {
@@ -52,11 +52,16 @@ const ProfileInfo = (props) => {
     )
 }
 
+
+
 const ProfileData = (props) => {
     return <div>
         {props.isOwner &&
         <div>
-            <button onClick={props.goToEditMode}>Edit profile</button>
+            <Button type="submit"
+                    onClick={props.goToEditMode}
+                    variant="contained"
+                    color="primary">Edit profile</Button>
         </div>}
         <div>
             <b>Full Name:</b> {props.userProfile.fullName}
