@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/memesOfTheWorld/static/css/main.7e46ee21.chunk.css",
+    "main.css": "/memesOfTheWorld/static/css/main.d0b7328d.chunk.css",
     "main.js": "/memesOfTheWorld/static/js/main.d7e5463a.chunk.js",
     "main.js.map": "/memesOfTheWorld/static/js/main.d7e5463a.chunk.js.map",
     "runtime-main.js": "/memesOfTheWorld/static/js/runtime-main.6ee2ed73.js",
@@ -20,7 +20,7 @@
     "static/css/3.0f53e311.chunk.css.map": "/memesOfTheWorld/static/css/3.0f53e311.chunk.css.map",
     "static/css/4.d9ac863d.chunk.css.map": "/memesOfTheWorld/static/css/4.d9ac863d.chunk.css.map",
     "static/css/5.26a14392.chunk.css.map": "/memesOfTheWorld/static/css/5.26a14392.chunk.css.map",
-    "static/css/main.7e46ee21.chunk.css.map": "/memesOfTheWorld/static/css/main.7e46ee21.chunk.css.map",
+    "static/css/main.d0b7328d.chunk.css.map": "/memesOfTheWorld/static/css/main.d0b7328d.chunk.css.map",
     "static/js/2.4cfa1186.chunk.js.LICENSE.txt": "/memesOfTheWorld/static/js/2.4cfa1186.chunk.js.LICENSE.txt",
     "static/js/4.8f44a107.chunk.js.LICENSE.txt": "/memesOfTheWorld/static/js/4.8f44a107.chunk.js.LICENSE.txt",
     "static/media/preloader.eddc5ce2.svg": "/memesOfTheWorld/static/media/preloader.eddc5ce2.svg",
@@ -29,7 +29,7 @@
   "entrypoints": [
     "static/js/runtime-main.6ee2ed73.js",
     "static/js/2.4cfa1186.chunk.js",
-    "static/css/main.7e46ee21.chunk.css",
+    "static/css/main.d0b7328d.chunk.css",
     "static/js/main.d7e5463a.chunk.js"
   ]
 }
