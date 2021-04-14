@@ -48,7 +48,7 @@ const MyPosts = React.memo((props) => {
         .map(p => <Post message={p.message} likes={p.likes} key={p.id}/>)
 
     return (
-        <div className={s.descriptionBlock}>
+        <div className={s.postsBlock}>
             <h3>My posts</h3>
             <MyPostsForm addPost={props.addPost}/>
             <div className={s.posts}>
