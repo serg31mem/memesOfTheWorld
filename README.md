@@ -1,8 +1,8 @@
 # Этот проект социальной сети был создан в рамках обучения frontend разработке. 
 
-Стек проекта: JS, React, Redux
+Стек проекта: JS, React, Redux, Redux-Thunk, Material-UI, React-Final-Form.
 
-## Проект доступен по ссылке: <a target="_blank" href="https://serg31mem.github.io/memesOfTheWorld/#/login">Нажми на меня</a>
+## Проект доступен по ссылке: <a target="_blank" href="https://serg31mem.github.io/memesOfTheWorld/#/login">нажми на меня</a>
 
 ## Данные для входа:
 
