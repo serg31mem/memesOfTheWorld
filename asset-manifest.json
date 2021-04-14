@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/memesOfTheWorld/static/css/main.2e5969ad.chunk.css",
-    "main.js": "/memesOfTheWorld/static/js/main.d7e5463a.chunk.js",
-    "main.js.map": "/memesOfTheWorld/static/js/main.d7e5463a.chunk.js.map",
-    "runtime-main.js": "/memesOfTheWorld/static/js/runtime-main.211450d5.js",
-    "runtime-main.js.map": "/memesOfTheWorld/static/js/runtime-main.211450d5.js.map",
-    "static/js/2.4cfa1186.chunk.js": "/memesOfTheWorld/static/js/2.4cfa1186.chunk.js",
-    "static/js/2.4cfa1186.chunk.js.map": "/memesOfTheWorld/static/js/2.4cfa1186.chunk.js.map",
+    "main.css": "/memesOfTheWorld/static/css/main.aa1580ee.chunk.css",
+    "main.js": "/memesOfTheWorld/static/js/main.5b6b1458.chunk.js",
+    "main.js.map": "/memesOfTheWorld/static/js/main.5b6b1458.chunk.js.map",
+    "runtime-main.js": "/memesOfTheWorld/static/js/runtime-main.46ccc5f2.js",
+    "runtime-main.js.map": "/memesOfTheWorld/static/js/runtime-main.46ccc5f2.js.map",
+    "static/js/2.ab0b870a.chunk.js": "/memesOfTheWorld/static/js/2.ab0b870a.chunk.js",
+    "static/js/2.ab0b870a.chunk.js.map": "/memesOfTheWorld/static/js/2.ab0b870a.chunk.js.map",
     "static/css/3.d75152fa.chunk.css": "/memesOfTheWorld/static/css/3.d75152fa.chunk.css",
-    "static/js/3.2a8709cc.chunk.js": "/memesOfTheWorld/static/js/3.2a8709cc.chunk.js",
-    "static/js/3.2a8709cc.chunk.js.map": "/memesOfTheWorld/static/js/3.2a8709cc.chunk.js.map",
+    "static/js/3.4dc6cf24.chunk.js": "/memesOfTheWorld/static/js/3.4dc6cf24.chunk.js",
+    "static/js/3.4dc6cf24.chunk.js.map": "/memesOfTheWorld/static/js/3.4dc6cf24.chunk.js.map",
     "static/css/4.d9ac863d.chunk.css": "/memesOfTheWorld/static/css/4.d9ac863d.chunk.css",
     "static/js/4.8f44a107.chunk.js": "/memesOfTheWorld/static/js/4.8f44a107.chunk.js",
     "static/js/4.8f44a107.chunk.js.map": "/memesOfTheWorld/static/js/4.8f44a107.chunk.js.map",
@@ -20,16 +20,19 @@
     "static/css/3.d75152fa.chunk.css.map": "/memesOfTheWorld/static/css/3.d75152fa.chunk.css.map",
     "static/css/4.d9ac863d.chunk.css.map": "/memesOfTheWorld/static/css/4.d9ac863d.chunk.css.map",
     "static/css/5.26a14392.chunk.css.map": "/memesOfTheWorld/static/css/5.26a14392.chunk.css.map",
-    "static/css/main.2e5969ad.chunk.css.map": "/memesOfTheWorld/static/css/main.2e5969ad.chunk.css.map",
-    "static/js/2.4cfa1186.chunk.js.LICENSE.txt": "/memesOfTheWorld/static/js/2.4cfa1186.chunk.js.LICENSE.txt",
+    "static/css/main.aa1580ee.chunk.css.map": "/memesOfTheWorld/static/css/main.aa1580ee.chunk.css.map",
+    "static/js/2.ab0b870a.chunk.js.LICENSE.txt": "/memesOfTheWorld/static/js/2.ab0b870a.chunk.js.LICENSE.txt",
     "static/js/4.8f44a107.chunk.js.LICENSE.txt": "/memesOfTheWorld/static/js/4.8f44a107.chunk.js.LICENSE.txt",
+    "static/media/Telegram.d42bba1c.svg": "/memesOfTheWorld/static/media/Telegram.d42bba1c.svg",
+    "static/media/instagram.02967a62.svg": "/memesOfTheWorld/static/media/instagram.02967a62.svg",
+    "static/media/mail.580a851b.svg": "/memesOfTheWorld/static/media/mail.580a851b.svg",
     "static/media/preloader.eddc5ce2.svg": "/memesOfTheWorld/static/media/preloader.eddc5ce2.svg",
     "static/media/userPhoto.png": "/memesOfTheWorld/static/media/userPhoto.92d80a7e.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.211450d5.js",
-    "static/js/2.4cfa1186.chunk.js",
-    "static/css/main.2e5969ad.chunk.css",
-    "static/js/main.d7e5463a.chunk.js"
+    "static/js/runtime-main.46ccc5f2.js",
+    "static/js/2.ab0b870a.chunk.js",
+    "static/css/main.aa1580ee.chunk.css",
+    "static/js/main.5b6b1458.chunk.js"
   ]
 }
