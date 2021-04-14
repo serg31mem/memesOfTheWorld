@@ -19,14 +19,9 @@ const Nav = (props) => {
 
             {linkCreator('dialogs', 'Messages')}
 
-            {linkCreator('news', 'News')}
-
             {linkCreator('users', 'Users')}
 
-            {linkCreator('music', 'Music')}
-
-            {linkCreator('settings', 'Settings')}
-
+            {props.isAuth &&
             <div>
                 <div className={s.itemFriends}>
                     Friends
@@ -34,7 +29,8 @@ const Nav = (props) => {
                 <div>
                     <BlockFriends profileData={props.profileData}/>
                 </div>
-            </div>
+            </div>}
+
         </nav>
     )
 }

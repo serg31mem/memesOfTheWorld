@@ -1,0 +1,58 @@
+.footer {
+    display: grid;
+    grid-area: f;
+    background-color: #F0FFF0;
+}
+
+.creator {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.creator a {
+    text-decoration: none;
+    color: #3F51B5;
+}
+
+.contactsCreator {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.telegram a {
+    text-decoration: none;
+}
+
+.telegram img {
+    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+}
+
+.instagram a {
+    text-decoration: none;
+}
+
+.instagram img {
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 45px;
+    height: 45px;
+}
+
+.mail a {
+    text-decoration: none;
+
+}
+
+.mail img {
+    margin-left: 10px;
+    width: 45px;
+    height: 45px;
+}
+
+.copyright {
+    margin-left: auto;
+    margin-right: auto;
+}

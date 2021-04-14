@@ -14,6 +14,11 @@ const Header = (props) => {
                         : <NavLink to='/login'>Login</NavLink>}
                 </span>
                 <span>
+                    {(props.isAuth)
+                        ? props.userPhoto !== null ? <div><img src={props.userPhoto}/></div> : <img src={userPhoto}/>
+                        : null}
+                </span>
+                <span>
                     {props.isAuth
                         ? <div>
                             <Button type="submit"
@@ -21,11 +26,6 @@ const Header = (props) => {
                                     variant="contained"
                                     color="primary">Logout</Button>
                         </div>
-                        : null}
-                </span>
-                <span>
-                    {(props.isAuth)
-                        ? props.userPhoto !== null ? <div><img src={props.userPhoto}/></div> : <img src={userPhoto}/>
                         : null}
                 </span>
             </div>

@@ -1,4 +1,5 @@
-.descriptionBlock {
+.postsBlock {
+    grid-area: pb;
     padding: 10px;
 }
 

@@ -13,7 +13,7 @@ const ProfilePhoto = (props) => {
         }
     }
     if (!props.userProfile) {
-        return <div className={s.preloader}><Preloader/></div>
+        return <div><Preloader/></div>
     }
     return (
         <div className={s.profilePhoto}>

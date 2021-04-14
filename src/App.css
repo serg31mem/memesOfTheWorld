@@ -1,13 +1,26 @@
 .app-wrapper {
     display: grid;
-    width: 1920px;
+    width: auto;
 
     grid-template-areas:
     "h h"
-    "n c";
+    "n c"
+    "f f";
 
-    grid-template-rows: 125px 1fr;
+    grid-template-rows: 125px 10fr 125px;
     grid-template-columns: 2fr 10fr;
+}
+
+@media all and (max-width: 575px) {
+    .app-wrapper {
+        grid-template-areas:
+      "h"
+      "c"
+      "n"
+      "f";
+        grid-template-rows: 120px 1fr 500px 100px;
+        grid-template-columns: 1fr;
+    }
 }
 
 .app-wrapper-content {
