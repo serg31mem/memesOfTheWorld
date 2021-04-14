@@ -5,7 +5,7 @@
 
 ## Для того чтобы его открыть перейдите по ссылке:
 
-<a href="https://serg31mem.github.io/memesOfTheWorld/#/login" target="_blank">Нажми на меня, сладкий &#128527;</a>
+<a target="_blank" href="https://serg31mem.github.io/memesOfTheWorld/#/login">Нажми на меня, сладкий &#128527;</a>
 
 ## Как попасть на сайт?
 
