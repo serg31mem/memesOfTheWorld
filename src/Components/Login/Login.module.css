@@ -11,3 +11,8 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.formSummaryError {
+    padding: 10px;
+    color: red;
+}

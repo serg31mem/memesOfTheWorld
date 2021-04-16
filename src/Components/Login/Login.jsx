@@ -18,7 +18,7 @@ const LoginForm = (props) => {
 
     return (
         <Form onSubmit={onSubmit}
-              render={({handleSubmit, submitting, pristine}) => (
+              render={({handleSubmit}) => (
                   <form onSubmit={async event => {
                       await handleSubmit(event)
                   }}>
