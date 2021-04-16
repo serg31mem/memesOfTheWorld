@@ -19,7 +19,8 @@ const Footer = (props) => {
                     <a target="_blank" href="https://www.instagram.com/sergey_karpov_/"><img src={instagram}/> </a>
                 </span>
                 <span className={s.mail}>
-                    <a target="_blank" href="mailto:sergey31karpov@gmail.com"><img src={mail}/></a>
+                    <a target="_blank" href="mailto:sergey31karpov@gmail.com?subject=Хотим взять вас на работу"><img
+                        src={mail}/></a>
                 </span>
             </div>
             <div className={s.copyright}>
