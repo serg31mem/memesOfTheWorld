@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
+import {HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import React from "react";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
@@ -11,7 +11,6 @@ import {withSuspense} from "./Components/hoc/withSuspense";
 import FriendsContainer from "./Components/Friends/FriendsContainer";
 import NavContainer from "./Components/NavBar/NavContainer";
 import {compose} from "redux";
-import Footer from "./Components/Footer/Footer";
 import FooterContainer from "./Components/Footer/FooterContainer";
 
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));

@@ -2,7 +2,6 @@ import * as React from "react";
 import Paginator from "../Common/Paginator/Paginator";
 import User from "./User/User";
 import Preloader from "../Common/Preloader/Preloader";
-import Pagination from '@material-ui/lab/Pagination'
 
 const Users = (props) => {
 
