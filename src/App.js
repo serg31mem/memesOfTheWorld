@@ -12,6 +12,7 @@ import FriendsContainer from "./Components/Friends/FriendsContainer";
 import NavContainer from "./Components/NavBar/NavContainer";
 import {compose} from "redux";
 import FooterContainer from "./Components/Footer/FooterContainer";
+import ScrollToTop from "./Components/Common/ScrollToTop";
 
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
@@ -28,6 +29,7 @@ class App extends React.Component {
         }
         return (
             <div className='app-wrapper'>
+                <ScrollToTop />
                 <HeaderContainer/>
                 <NavContainer/>
                 <div className='app-wrapper-content'>
