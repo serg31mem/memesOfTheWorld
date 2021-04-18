@@ -3,7 +3,7 @@ import * as React from "react";
 import {useState} from "react";
 import ProfileDataForm from "./ProfileDataForm";
 import Button from "@material-ui/core/Button";
-import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
 
@@ -24,7 +24,7 @@ const ProfileInfo = (props) => {
 
     return (
         <div className={s.profileInfo}>
-            <ProfileStatusWithHooks status={props.status} updateProfileStatus={props.updateProfileStatus}/>
+            <ProfileStatus status={props.status} updateProfileStatus={props.updateProfileStatus}/>
             <div className={s.profileData}>
                 {editMode
                     ? <ProfileDataForm initialValues={props.userProfile} userProfile={props.userProfile}
