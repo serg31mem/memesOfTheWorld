@@ -24,6 +24,4 @@
 
 ## Контакты для обратной связи:
 
-***[Telegram](https://t.me/sergey_karpov31)***
-
-***[Email](mailto:sergey31karpov@gmail.com)***
+***[Telegram](https://t.me/sergey_karpov31)*** ***[Email](mailto:sergey31karpov@gmail.com)***
