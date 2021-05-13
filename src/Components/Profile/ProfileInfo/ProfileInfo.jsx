@@ -37,7 +37,6 @@ const ProfileInfo = (props) => {
     )
 }
 
-
 const ProfileData = (props) => {
 
     const [openContact, setOpenContact] = useState(false)

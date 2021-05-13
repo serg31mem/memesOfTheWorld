@@ -1,4 +1,5 @@
 import {profileAPI} from "../Components/api/api";
+import {photosType, userProfileType } from "../Types/types";
 import {authMe} from "./auth-reducer";
 
 const ADD_POST = 'profile/ADD-POST';
@@ -8,6 +9,20 @@ const DELETE_POST = 'profile/DELETE_POST'
 const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS'
 const SET_ERROR_FORM = 'profile/SET_ERROR_FORM'
 
+type profileDataType = {
+    homeLink: string
+    id: number
+    name: string
+    avatar: string
+    status: string
+    country: string
+    city: string
+}
+type postsDataType = {
+    id: number
+    message: string
+    likes: number
+}
 
 let initiationState = {
     profileData: [
@@ -15,8 +30,7 @@ let initiationState = {
             homeLink: 'sergio',
             id: 1,
             name: 'Sergio',
-            avatar: <img
-                src='https://yt3.ggpht.com/a/AATXAJxetozsFIxpK6XvnUDpCVKIYn7hxLiM2DVFWixqPA=s900-c-k-c0xffffffff-no-rj-mo'/>,
+            avatar: 'https://yt3.ggpht.com/a/AATXAJxetozsFIxpK6XvnUDpCVKIYn7hxLiM2DVFWixqPA=s900-c-k-c0xffffffff-no-rj-mo',
             status: 'Life coll',
             country: 'Russia',
             city: 'Samara'
@@ -25,8 +39,7 @@ let initiationState = {
             homeLink: 'alex',
             id: 2,
             name: 'Alex',
-            avatar: <img
-                src='https://avatars.yandex.net/get-music-user-playlist/51766/595160370.1000.25677/m1000x1000?1589812186474&webp=false'/>,
+            avatar: 'https://avatars.yandex.net/get-music-user-playlist/51766/595160370.1000.25677/m1000x1000?1589812186474&webp=false',
             status: '3D coll',
             country: 'Russia',
             city: 'Samara'
@@ -35,8 +48,7 @@ let initiationState = {
             homeLink: 'nasty',
             id: 3,
             name: 'Nasty',
-            avatar: <img
-                src='https://4.bp.blogspot.com/-aau51YHhLqI/UDFgnKjncGI/AAAAAAAAAH8/8WKFByNzopI/s1600/INFINITO+DESPRECIO.png'/>,
+            avatar: 'https://4.bp.blogspot.com/-aau51YHhLqI/UDFgnKjncGI/AAAAAAAAAH8/8WKFByNzopI/s1600/INFINITO+DESPRECIO.png',
             status: 'Psychology coll',
             country: 'Russia',
             city: 'Samara'
@@ -45,7 +57,7 @@ let initiationState = {
             homeLink: 'mike',
             id: 4,
             name: 'Mike',
-            avatar: <img src='https://ezhbaev.ru/faces/img/large/surprised-rage-clean-l.png'/>,
+            avatar: 'https://ezhbaev.ru/faces/img/large/surprised-rage-clean-l.png',
             status: 'Money coll',
             country: 'Russia',
             city: 'Samara'
@@ -54,7 +66,7 @@ let initiationState = {
             homeLink: 'svetachka',
             id: 5,
             name: 'Svetachka',
-            avatar: <img src='https://forum.exbo.ru/assets/files/2019-11-10/1573417254-129155-14d.png'/>,
+            avatar: 'https://forum.exbo.ru/assets/files/2019-11-10/1573417254-129155-14d.png',
             status: 'Pussies coll',
             country: 'Russia',
             city: 'Samara'
@@ -63,23 +75,25 @@ let initiationState = {
             homeLink: 'losha',
             id: 6,
             name: 'Losha',
-            avatar: <img src='https://i03.fotocdn.net/s102/9d0b74786a63f5d0/user_l/222810920.jpg'/>,
+            avatar: 'https://i03.fotocdn.net/s102/9d0b74786a63f5d0/user_l/222810920.jpg',
             status: 'Drugs coll',
             country: 'Russia',
             city: 'Samara'
         },
-    ],
+    ] as Array<profileDataType>,
     postsData: [
         {id: 1, message: 'Привет, классные мемы', likes: 3},
         {id: 2, message: 'Твои мемы дают силы жить!', likes: 69}
-    ],
-    userProfile: null,
+    ] as Array<postsDataType>,
+    userProfile: null as userProfileType | null,
     status: '',
     isErrorForm: false,
     errorMessage: '',
 }
 
-const profileReducer = (state = initiationState, action) => {
+export type initiationStateType = typeof initiationState
+
+const profileReducer = (state = initiationState, action: any): initiationStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -106,10 +120,10 @@ const profileReducer = (state = initiationState, action) => {
                 ...state,
                 postsData: [...state.postsData].filter((p) => p.id !== action.idPost)
             }
-            case SAVE_PHOTO_SUCCESS:
-                return {
+        case SAVE_PHOTO_SUCCESS:
+            return {
                 ...state,
-                userProfile: {...state.userProfile, photos: action.photos}
+                userProfile: {...state.userProfile, photos: action.photos} as userProfileType
             }
         case SET_ERROR_FORM:
             return {
@@ -122,36 +136,74 @@ const profileReducer = (state = initiationState, action) => {
     }
 }
 
-export const addPost = (bodyPost) => ({type: ADD_POST, bodyPost})
+export type addPostActionType = {
+    type: typeof ADD_POST
+    bodyPost: string
+}
+export const addPost = (bodyPost: string): addPostActionType => ({type: ADD_POST, bodyPost})
 
-export const deletePost = (idPost) => ({type: DELETE_POST, idPost})
+export type deletePostActionType = {
+    type: typeof DELETE_POST
+    idPost: number
+}
+export const deletePost = (idPost: number): deletePostActionType => ({type: DELETE_POST, idPost})
 
-export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
+export type setUserProfileActionType = {
+    type: typeof SET_USER_PROFILE
+    userProfile: userProfileType
+}
+export const setUserProfile = (userProfile: userProfileType): setUserProfileActionType => {
+    return {
+        type: SET_USER_PROFILE, userProfile
+    }
+}
 
-export const setProfileStatus = (profileStatus) => ({type: SET_PROFILE_STATUS, profileStatus})
+export type setProfileStatusActionType = {
+    type: typeof SET_PROFILE_STATUS
+    profileStatus: string
+}
+export const setProfileStatus = (profileStatus: string): setProfileStatusActionType => {
+    return {
+        type: SET_PROFILE_STATUS, profileStatus
+    }
+}
 
-export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
+export type savePhotoSuccessActionType = {
+    type: typeof SAVE_PHOTO_SUCCESS
+    photos: photosType
+}
+export const savePhotoSuccess = (photos: photosType): savePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos})
 
-export const setErrorForm = (isErrorForm, errorMessage) => ({type: SET_ERROR_FORM, isErrorForm, errorMessage})
+export type setErrorFormActionType = {
+    type: typeof SET_ERROR_FORM
+    isErrorForm: boolean
+    errorMessage: string
+}
 
-export const getProfile = (userId) => async (dispatch) => {
+export const setErrorForm = (isErrorForm: boolean, errorMessage: string): setErrorFormActionType => ({
+    type: SET_ERROR_FORM,
+    isErrorForm,
+    errorMessage
+})
+
+export const getProfile = (userId: number) => async (dispatch: any) => {
     let data = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(data))
 }
 
-export const getProfileStatus = (userId) => async (dispatch) => {
+export const getProfileStatus = (userId: number) => async (dispatch: any) => {
     let response = await profileAPI.getProfileStatus(userId)
     dispatch(setProfileStatus(response))
 }
 
-export const updateProfileStatus = (status) => async (dispatch) => {
+export const updateProfileStatus = (status: string) => async (dispatch: any) => {
     let response = await profileAPI.updateProfileStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setProfileStatus(status))
     }
 }
 
-export const savePhoto = (photos) => async (dispatch) => {
+export const savePhoto = (photos: any) => async (dispatch: any) => {
     let response = await profileAPI.savePhoto(photos)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
@@ -159,7 +211,7 @@ export const savePhoto = (photos) => async (dispatch) => {
     }
 }
 
-export const saveProfile = (profile) => async (dispatch, getState) => {
+export const saveProfile = (profile: userProfileType) => async (dispatch: any, getState: any) => {
     const userId = getState().auth.userID
     let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {

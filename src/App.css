@@ -7,7 +7,7 @@
     "n c"
     "f f";
 
-    grid-template-rows: 125px 10fr 125px;
+    grid-template-rows: 125px 1fr 125px;
     grid-template-columns: 2fr 10fr;
 }
 
@@ -18,7 +18,7 @@
       "c"
       "n"
       "f";
-        grid-template-rows: 120px 1fr 500px 100px;
+        grid-template-rows: 125px 1fr 0.5fr 125px;
         grid-template-columns: 1fr;
     }
 }

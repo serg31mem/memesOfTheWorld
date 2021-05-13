@@ -5,7 +5,7 @@ const Friend = (props) => {
     return (
         <div className={s.friends}>
             <div>
-                <NavLink to={props.homeLink}>{props.avatar}</NavLink>
+                <NavLink to={props.homeLink}><img src={props.avatar}/></NavLink>
             </div>
             <div className={s.friendsName}>
                 <NavLink to={props.homeLink}>{props.name}</NavLink>
