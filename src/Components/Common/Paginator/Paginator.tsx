@@ -1,12 +1,20 @@
 import * as React from "react";
 import s from '../Paginator/Paginator.module.css'
-import {useState} from "react";
+import {FC, useState} from "react";
 import cn from "classnames"
 import Button from "@material-ui/core/Button";
 
-const Paginator = ({portionSize = 10, ...props}) => {
+type PropsType = {
+    totalCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    portionSize?: number
+}
+
+const Paginator: FC<PropsType> = ({portionSize = 10, ...props}) => {
     let pagesCount = Math.ceil(props.totalCount / props.pageSize)
-    let pages = []
+    let pages: Array<number> = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
@@ -53,6 +61,5 @@ const Paginator = ({portionSize = 10, ...props}) => {
     </div>
 
 }
-
 
 export default Paginator
