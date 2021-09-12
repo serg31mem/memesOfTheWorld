@@ -1,9 +1,6 @@
-const SEND_MESSAGE = 'dialogs/SEND-MESSAGE';
+import { messageDataType } from "../Types/types";
 
-export type messageDataType = {
-    id: number
-    textMessage: string
-}
+const SEND_MESSAGE = 'dialogs/SEND-MESSAGE';
 
 let initiationState = {
     messageData: [
@@ -15,7 +12,7 @@ let initiationState = {
 
 export type initiationStateType = typeof initiationState
 
-const dialogsReducer = (state = initiationState, action: any) => {
+const dialogsReducer = (state = initiationState, action: ActionsTypes) => {
     switch (action.type) {
         case SEND_MESSAGE:{
             let newMessage = {
@@ -32,11 +29,12 @@ const dialogsReducer = (state = initiationState, action: any) => {
     }
 }
 
+type ActionsTypes = sendMessageActionType
+
 export type sendMessageActionType = {
     type: typeof SEND_MESSAGE
     messageBody: string
 }
-
 export const sendMessage = (messageBody: string): sendMessageActionType => ({type: SEND_MESSAGE, messageBody})
 
 export default dialogsReducer
