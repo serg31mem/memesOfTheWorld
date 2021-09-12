@@ -1,4 +1,6 @@
-import {authAPI, profileAPI, securityAPI} from "../Components/api/api";
+import { ThunkAction } from "redux-thunk";
+import {authAPI, profileAPI, ResultCodeEnum, securityAPI} from "../Components/api/api";
+import { AppType } from "./store-redux";
 
 const SET_USER_DATA = 'auth/SET_USER_DATA'
 const SET_USER_PHOTO = 'auth/SET_USER_PHOTO'
@@ -21,10 +23,11 @@ let initiationState = {
 
 export type initiationStateType = typeof initiationState
 
-const authReducer = (state = initiationState, action: any): initiationStateType => {
+const authReducer = (state = initiationState, action: ActionsTypes): initiationStateType => {
 
     switch (action.type) {
         case SET_USER_DATA:
+            
             return {
                 ...state,
                 ...action.data,
@@ -57,6 +60,10 @@ const authReducer = (state = initiationState, action: any): initiationStateType 
 
 export default authReducer
 
+type ActionsTypes = setUserDataActionType | setUserPhotoActionType | setCaptchaActionType |
+    setErrorFormActionType | toggleIsLoggingProgressActionType
+
+
 export type setUserDataActionDataType = {
     userID: number | null
     login: string | null
@@ -76,10 +83,10 @@ export const setUserData = (userID: number | null, email: string | null, login: 
 
 export type setUserPhotoActionType = {
     type: typeof SET_USER_PHOTO
-    userPhoto: string
+    userPhoto: string | null
 }
 
-export const setUserPhoto = (userPhoto: string): setUserPhotoActionType => ({type: SET_USER_PHOTO, userPhoto})
+export const setUserPhoto = (userPhoto: string | null): setUserPhotoActionType => ({type: SET_USER_PHOTO, userPhoto})
 
 export type setCaptchaActionType = {
     type: typeof SET_CAPTCHA_URL
@@ -110,27 +117,29 @@ export const toggleIsLoggingProgress = (isFetching: boolean): toggleIsLoggingPro
     isFetching
 })
 
-export const authMe = () => async (dispatch: any) => {
-    let response = await authAPI.authMe()
-    if (response.data.resultCode === 0) {
-        let {id, login, email} = response.data.data
+type ThunkType = ThunkAction<Promise<void>, AppType, unknown, ActionsTypes>
+
+export const authMe = (): ThunkType => async (dispatch) => {
+    let dataMe = await authAPI.authMe()
+    if (dataMe.resultCode === ResultCodeEnum.Success) {
+        let {id, login, email} = dataMe.data
         dispatch(setUserData(id, email, login, true))
         let data = await profileAPI.getProfile(id)
         dispatch(setUserPhoto(data.photos.small))
     }
 }
 
-export const authLogin = (email: string, password: string, rememberMe: boolean, captcha: string) => {
-    return async (dispatch: any) => {
+export const authLogin = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
+    return async (dispatch) => {
         dispatch(toggleIsLoggingProgress(true))
-        let response = await authAPI.authLogin(email, password, rememberMe, captcha)
-        if (response.data.resultCode === 0) {
+        let data = await authAPI.authLogin(email, password, rememberMe, captcha)
+        if (data.resultCode === ResultCodeEnum.Success) {
             dispatch(authMe())
         } else {
-            if (response.data.resultCode === 10) {
+            if (data.resultCode === ResultCodeEnum.Captcha) {
                 dispatch(getCaptcha())
             } else {
-                let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+                let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
                 dispatch(setErrorForm(true, message))
             }
         }
@@ -138,14 +147,14 @@ export const authLogin = (email: string, password: string, rememberMe: boolean, 
     }
 }
 
-export const authLogout = () => async (dispatch: any) => {
-    let response = await authAPI.authLogout()
-    if (response.data.resultCode === 0) {
+export const authLogout = (): ThunkType => async (dispatch) => {
+    let data = await authAPI.authLogout()
+    if (data.resultCode === ResultCodeEnum.Success) {
         dispatch(setUserData(null, null, null, false))
     }
 }
 
-export const getCaptcha = () => async (dispatch: any) => {
-    let response = await securityAPI.getCaptcha()
-    dispatch(setCaptcha(response.data.url))
+export const getCaptcha = (): ThunkType => async (dispatch) => {
+    let data = await securityAPI.getCaptcha()
+    dispatch(setCaptcha(data.url))
 }
