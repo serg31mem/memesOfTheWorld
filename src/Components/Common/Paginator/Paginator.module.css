@@ -5,6 +5,7 @@
 .pageNumber {
     padding: 2px;
     border: 1px solid gray;
+    cursor: pointer;
 }
 
 .pageNumber.selectedPage {
