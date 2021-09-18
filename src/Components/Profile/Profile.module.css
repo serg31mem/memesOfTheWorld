@@ -4,6 +4,6 @@
     "pp pi"
     "pb pb";
     grid-template-columns: 2fr 10fr;
-    grid-template-rows: 0.5fr 1fr;
+    grid-template-rows: 230px 100%;
     padding: 10px;
 }

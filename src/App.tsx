@@ -14,9 +14,9 @@ import {compose} from "redux";
 import FooterContainer from "./Components/Footer/FooterContainer";
 import ScrollToTop from "./Components/Common/ScrollToTop";
 
-const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
-const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
-const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer'));
+const ProfileContainer = React.lazy<any>(() => import('./Components/Profile/ProfileContainer'));
+const DialogsContainer = React.lazy<any>(() => import('./Components/Dialogs/DialogsContainer'));
+const UsersContainer = React.lazy<any>(() => import('./Components/Users/UsersContainer'));
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -63,7 +63,7 @@ let mapStateToProps = (state: AppType): MapStateToPropsType => ({
     initialized: state.app.initialized
 })
 
-const AppContainer: typeof React.Component = compose(
+const AppContainer: any = compose(
     withRouter,
     connect<MapStateToPropsType, MapDispatchToPropsType, undefined, AppType>(mapStateToProps, {initializedSuccess})
 )(App)
