@@ -1,6 +1,6 @@
 import { ThunkAction } from "redux-thunk";
 import {authAPI, profileAPI, ResultCodeEnum, securityAPI} from "../Components/api/api";
-import { AppType } from "./store-redux";
+import {ActionsTypes, AppType } from "./store-redux";
 
 const SET_USER_DATA = 'auth/SET_USER_DATA'
 const SET_USER_PHOTO = 'auth/SET_USER_PHOTO'
@@ -23,7 +23,7 @@ let initiationState = {
 
 export type initiationStateType = typeof initiationState
 
-const authReducer = (state = initiationState, action: ActionsTypes): initiationStateType => {
+const authReducer = (state = initiationState, action: ActionsTypes<typeof actions>): initiationStateType => {
 
     switch (action.type) {
         case SET_USER_DATA:
@@ -57,67 +57,35 @@ const authReducer = (state = initiationState, action: ActionsTypes): initiationS
             return state
     }
 }
-
 export default authReducer
 
-type ActionsTypes = setUserDataActionType | setUserPhotoActionType | setCaptchaActionType |
-    setErrorFormActionType | toggleIsLoggingProgressActionType
-
-
-export type setUserDataActionDataType = {
-    userID: number | null
-    login: string | null
-    email: string | null
-    isAuth: boolean
+const actions = {
+    setUserData: (userID: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
+        type: SET_USER_DATA,
+        data: {userID, login, email, isAuth}
+    } as const),
+    setUserPhoto: (userPhoto: string | null) => ({type: SET_USER_PHOTO, userPhoto} as const),
+    setCaptcha: (captchaUrl: string) => ({type: SET_CAPTCHA_URL, captchaUrl} as const),
+    setErrorForm: (isErrorForm: boolean, errorMessage: string) => ({
+        type: SET_ERROR_FORM,
+        isErrorForm,
+        errorMessage
+    } as const),
+    toggleIsLoggingProgress: (isFetching: boolean) => ({
+        type: TOGGLE_IS_LOGGING_PROGRESS,
+        isFetching
+    } as const),
 }
 
-export type setUserDataActionType = {
-    type: typeof SET_USER_DATA
-    data: setUserDataActionDataType
-}
+export const {
+    toggleIsLoggingProgress,
+    setErrorForm,
+    setUserData,
+    setUserPhoto,
+    setCaptcha,
+} = actions
 
-export const setUserData = (userID: number | null, email: string | null, login: string | null, isAuth: boolean): setUserDataActionType => ({
-    type: SET_USER_DATA,
-    data: {userID, login, email, isAuth}
-})
-
-export type setUserPhotoActionType = {
-    type: typeof SET_USER_PHOTO
-    userPhoto: string | null
-}
-
-export const setUserPhoto = (userPhoto: string | null): setUserPhotoActionType => ({type: SET_USER_PHOTO, userPhoto})
-
-export type setCaptchaActionType = {
-    type: typeof SET_CAPTCHA_URL
-    captchaUrl: string
-}
-
-export const setCaptcha = (captchaUrl: string): setCaptchaActionType => ({type: SET_CAPTCHA_URL, captchaUrl})
-
-export type setErrorFormActionType = {
-    type: typeof SET_ERROR_FORM
-    errorMessage: string
-    isErrorForm: boolean
-}
-
-export const setErrorForm = (isErrorForm: boolean, errorMessage: string): setErrorFormActionType => ({
-    type: SET_ERROR_FORM,
-    isErrorForm,
-    errorMessage
-})
-
-export type toggleIsLoggingProgressActionType = {
-    type: typeof TOGGLE_IS_LOGGING_PROGRESS
-    isFetching: boolean
-}
-
-export const toggleIsLoggingProgress = (isFetching: boolean): toggleIsLoggingProgressActionType => ({
-    type: TOGGLE_IS_LOGGING_PROGRESS,
-    isFetching
-})
-
-type ThunkType = ThunkAction<Promise<void>, AppType, unknown, ActionsTypes>
+type ThunkType = ThunkAction<Promise<void>, AppType, unknown, ActionsTypes<typeof actions>>
 
 export const authMe = (): ThunkType => async (dispatch) => {
     let dataMe = await authAPI.authMe()

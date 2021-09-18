@@ -2,7 +2,7 @@ import {profileAPI, ResultCodeEnum} from "../Components/api/api";
 import {photoFileType, photosType, postsDataType, profileDataType, userProfileType} from "../Types/types";
 import {authMe} from "./auth-reducer";
 import {ThunkAction} from "redux-thunk";
-import {AppType} from "./store-redux";
+import {ActionsTypes, AppType} from "./store-redux";
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE'
@@ -80,7 +80,7 @@ let initiationState = {
 
 export type initiationStateType = typeof initiationState
 
-const profileReducer = (state = initiationState, action: ActionsTypes): initiationStateType => {
+const profileReducer = (state = initiationState, action: ActionsTypes<typeof actions>): initiationStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -123,61 +123,37 @@ const profileReducer = (state = initiationState, action: ActionsTypes): initiati
     }
 }
 
-
-type ActionsTypes = addPostActionType | deletePostActionType | setUserProfileActionType | setProfileStatusActionType |
-    savePhotoSuccessActionType | setErrorFormActionType
-
-export type addPostActionType = {
-    type: typeof ADD_POST
-    bodyPost: string
-}
-export const addPost = (bodyPost: string): addPostActionType => ({type: ADD_POST, bodyPost})
-
-export type deletePostActionType = {
-    type: typeof DELETE_POST
-    idPost: number
-}
-export const deletePost = (idPost: number): deletePostActionType => ({type: DELETE_POST, idPost})
-
-export type setUserProfileActionType = {
-    type: typeof SET_USER_PROFILE
-    userProfile: userProfileType
-}
-export const setUserProfile = (userProfile: userProfileType): setUserProfileActionType => {
-    return {
-        type: SET_USER_PROFILE, userProfile
-    }
+const actions = {
+    addPost: (bodyPost: string) => ({type: ADD_POST, bodyPost} as const),
+    deletePost: (idPost: number) => ({type: DELETE_POST, idPost} as const),
+    setUserProfile: (userProfile: userProfileType) => {
+        return {
+            type: SET_USER_PROFILE, userProfile
+        } as const
+    },
+    setProfileStatus: (profileStatus: string) => {
+        return {
+            type: SET_PROFILE_STATUS, profileStatus
+        } as const
+    },
+    savePhotoSuccess: (photos: photosType) => ({type: SAVE_PHOTO_SUCCESS, photos} as const),
+    setErrorForm: (isErrorForm: boolean, errorMessage: string) => ({
+        type: SET_ERROR_FORM,
+        isErrorForm,
+        errorMessage
+    } as const),
 }
 
-export type setProfileStatusActionType = {
-    type: typeof SET_PROFILE_STATUS
-    profileStatus: string
-}
-export const setProfileStatus = (profileStatus: string): setProfileStatusActionType => {
-    return {
-        type: SET_PROFILE_STATUS, profileStatus
-    }
-}
+export const {
+    setErrorForm,
+    deletePost,
+    savePhotoSuccess,
+    setProfileStatus,
+    setUserProfile,
+    addPost
+} = actions
 
-export type savePhotoSuccessActionType = {
-    type: typeof SAVE_PHOTO_SUCCESS
-    photos: photosType
-}
-export const savePhotoSuccess = (photos: photosType): savePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos})
-
-export type setErrorFormActionType = {
-    type: typeof SET_ERROR_FORM
-    isErrorForm: boolean
-    errorMessage: string
-}
-
-export const setErrorForm = (isErrorForm: boolean, errorMessage: string): setErrorFormActionType => ({
-    type: SET_ERROR_FORM,
-    isErrorForm,
-    errorMessage
-})
-
-type ThunkType = ThunkAction<Promise<void>, AppType, unknown, ActionsTypes>
+type ThunkType = ThunkAction<Promise<void>, AppType, unknown, ActionsTypes<typeof actions>>
 
 export const getProfile = (userId: number | null): ThunkType => async (dispatch) => {
     let data = await profileAPI.getProfile(userId)
